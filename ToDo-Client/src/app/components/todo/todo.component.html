@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+
+  <mat-toolbar-row>
+    <span>Welcome <span class="user-name">{{user.name}}</span></span>
+    <span class="example-spacer"></span>
+
+    <button (click)="logout()"  mat-icon-button >
+      <mat-icon >power_settings_new</mat-icon>
+    </button>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<button class="plus" mat-fab color="accent">+</button>

@@ -1,0 +1,21 @@
+.example-icon {
+    padding: 0 14px;
+}
+
+.example-spacer {
+flex: 1 1 auto;
+}
+
+.plus{
+    font-size: 35px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+}
+
+.user-name{
+    color: #84bedf;
+    margin-left: 10px;
+    font-size: 17px;
+}
