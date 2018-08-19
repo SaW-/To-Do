@@ -4,7 +4,11 @@ var router = express.Router();
 module.exports = function(app) {
     var todo = app.Modules.Todo.controllers.v1.TodoController;
 
-    router.get('/todos',  todo.index);
+    router.get('/',  todo.index);
+    router.post('/',  todo.store);
+    router.get('/:id',  todo.show);
+    //router.put('/:id',  todo.update);
+    //router.get('/:id/delete',  todo.delete);
 
     app.use('/api/v1', router);  
 };
