@@ -21,5 +21,19 @@ exports.create = (data) => {
         }
     );
 }
+
+exports.update = (id,data) => {
+    return TodoRepository.update(id,data).then((todo)=>{
+        return todo;
+        }
+    );
+}
+
+exports.delete = (id) => {
+    return TodoRepository.delete(id).then((todo)=>{
+        return todo;
+        }
+    );
+}
   
 return module.exports;

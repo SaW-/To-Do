@@ -7,8 +7,8 @@ module.exports = function(app) {
     router.get('/',  todo.index);
     router.post('/',  todo.store);
     router.get('/:id',  todo.show);
-    //router.put('/:id',  todo.update);
-    //router.get('/:id/delete',  todo.delete);
+    router.put('/:id',  todo.update);
+    router.delete('/:id',  todo.delete);
 
     app.use('/api/v1', router);  
 };
