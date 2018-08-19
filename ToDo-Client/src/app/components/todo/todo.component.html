@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
 
   <mat-toolbar-row>
-    <span>Welcome <span class="user-name">{{user.name}}</span></span>
+    <span>{{user.name}}</span>
     <span class="example-spacer"></span>
 
     <button (click)="logout()"  mat-icon-button >
@@ -11,4 +11,29 @@
 
 </mat-toolbar>
 
-<button class="plus" mat-fab color="accent">+</button>
+
+<div>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <input matInput placeholder="Subject" class="date-input">
+      </mat-panel-title>
+      <mat-panel-description>
+        <input matInput placeholder="Date" type="date" class="date-input">
+        <mat-icon>date_range</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-form-field class="comment">
+      <textarea required matInput placeholder="Comment"></textarea>
+    </mat-form-field>
+
+    <mat-action-row>
+      <button mat-button color="warn" (click)="prevStep()">Delete</button>
+      <button mat-button color="primary" (click)="nextStep()">Update</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+  
+</div>
+
+<button class="plus" (click)="addTodo()" mat-fab color="accent">+</button>

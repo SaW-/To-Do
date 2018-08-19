@@ -9,13 +9,15 @@ flex: 1 1 auto;
 .plus{
     font-size: 35px;
     font-weight: bold;
-    position: absolute;
+    position: fixed;
     bottom: 60px;
     right: 20px;
 }
 
-.user-name{
-    color: #84bedf;
-    margin-left: 10px;
-    font-size: 17px;
+.comment{
+    width: 100%;
+}
+
+.date-input {
+    max-width: 185px;
 }

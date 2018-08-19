@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 import { TodoComponent } from './components/todo/todo.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { RouterModule, Routes } from '@angular/router';
 
@@ -18,9 +19,10 @@ import {
 
 
 import {
-  MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
-  MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule
+  MatButtonModule, MatCardModule , MatDialogModule, MatInputModule, MatTableModule,
+  MatToolbarModule, MatExpansionModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule
 } from '@angular/material';
+import { CreateTodoComponent } from './components/create-todo/create-todo.component';
 
 const appRoutes: Routes = [
   { path: 'todo', component: TodoComponent },
@@ -33,7 +35,7 @@ export function getAuthServiceConfigs() {
       [
         {
           id: GoogleLoginProvider.PROVIDER_ID,
-	        provider: new GoogleLoginProvider("263320784902-69qdosdi2lt8mnlj9ms9gm0dc8e3rdpr.apps.googleusercontent.com")
+	      provider: new GoogleLoginProvider("263320784902-69qdosdi2lt8mnlj9ms9gm0dc8e3rdpr.apps.googleusercontent.com")
         },
       ]
   );
@@ -44,11 +46,16 @@ export function getAuthServiceConfigs() {
   declarations: [
     AppComponent,
     LoginComponent,
-    TodoComponent
+    TodoComponent,
+    CreateTodoComponent
+  ],entryComponents: [
+    CreateTodoComponent
   ],
   imports: [
     BrowserAnimationsModule,
     MatToolbarModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatButtonModule, 
     MatCardModule,
     MatInputModule,
@@ -57,6 +64,7 @@ export function getAuthServiceConfigs() {
     MatMenuModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatExpansionModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only

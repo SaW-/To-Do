@@ -1,0 +1,22 @@
+.dialog-footer{
+    text-align: center;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .example-container > * {
+    width: 100%;
+  }
+
+
+  .form-panel{
+    padding: 0px 20px;
+    margin-bottom: 36px;
+  }
+
+  mat-form-field{
+      width: 100%;
+  }
