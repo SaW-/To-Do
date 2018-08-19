@@ -10,5 +10,5 @@ module.exports = function(app) {
     router.put('/:id',  todo.update);
     router.delete('/:id',  todo.delete);
 
-    app.use('/api/v1', router);  
+    app.use('/api/v1/to-do', router);  
 };
