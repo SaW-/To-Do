@@ -1,7 +1,11 @@
 var models = require("../../../models");
 
 exports.listAll = (userId) => {
-  return models.Todo.findAll({where:{user_id:userId}}).then(todos => {
+  return models.Todo.findAll({attributes: [
+    'id','Subject','comment',
+    [models.Sequelize.fn('date_format', models.Sequelize.col('reminder'), '%Y-%m-%dT%h:%m'), 'reminder']
+],
+where:{user_id:userId}}).then(todos => {
     return todos;
   });
 }

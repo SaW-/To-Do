@@ -12,28 +12,28 @@
 </mat-toolbar>
 
 
-<div>
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <input matInput placeholder="Subject" class="date-input">
-      </mat-panel-title>
-      <mat-panel-description>
-        <input matInput placeholder="Date" type="date" class="date-input">
-        <mat-icon>date_range</mat-icon>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <mat-form-field class="comment">
-      <textarea required matInput placeholder="Comment"></textarea>
-    </mat-form-field>
-
-    <mat-action-row>
-      <button mat-button color="warn" (click)="prevStep()">Delete</button>
-      <button mat-button color="primary" (click)="nextStep()">Update</button>
-    </mat-action-row>
-  </mat-expansion-panel>
+<div *ngFor="let todo of toDos;let in=index">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <input matInput placeholder="Subject" [(ngModel)]="toDos[in].Subject" class="date-input">
+        </mat-panel-title>
+        <mat-panel-description>
+          <input matInput placeholder="Reminder" type="datetime-local" [(ngModel)]="toDos[in].reminder" class="date-input">
+          <mat-icon>date_range</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
   
-</div>
+      <mat-form-field class="comment">
+        <textarea required matInput [(ngModel)]="toDos[in].comment" placeholder="Comment"></textarea>
+      </mat-form-field>
+  
+      <mat-action-row>
+        <button mat-button color="warn" (click)="delete(todo)">Delete</button>
+        <button mat-button color="primary" (click)="update(todo)">Update</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    
+  </div>
 
 <button class="plus" (click)="addTodo()" mat-fab color="accent">+</button>

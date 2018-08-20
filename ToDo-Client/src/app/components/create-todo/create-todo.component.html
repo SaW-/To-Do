@@ -1,24 +1,22 @@
 
 
 <div class="form-panel">
-    <form  (ngSubmit)="addTodo()">
         <mat-form-field>
-          <input required matInput placeholder="Subject">
+          <input required matInput [(ngModel)]="subject" placeholder="Subject">
         </mat-form-field>
 
         <mat-form-field>
-          <textarea required matInput placeholder="Comment"></textarea>
+          <textarea required matInput [(ngModel)]="comment" placeholder="Comment"></textarea>
         </mat-form-field>
       
         <mat-form-field>
-          <input type="date" matInput placeholder="Reminder">
+          <input type="datetime-local" [(ngModel)]="reminder" matInput placeholder="Reminder">
         </mat-form-field>
-
+  
 
         <div class="dialog-footer">
-            <button mat-raised-button type="submit" color="primary">Create</button>
+            <button mat-raised-button (click)="addTodo()" color="primary">Create</button>
           </div>
 
-      </form>
 </div>
 

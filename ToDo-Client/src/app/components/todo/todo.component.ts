@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
+import { ApiService } from '../Service/api.service';
 
 export interface DialogData {
   animal: string;
@@ -22,11 +23,26 @@ export class TodoComponent implements OnInit {
 
   user:any = {};
 
-  constructor(private router: Router, private dialog: MatDialog) {
+  toDos;
+
+  constructor(private router: Router, private dialog: MatDialog,private apiServices: ApiService) {
     this.checkLogIn();
+    this.loadTodo();
   }
 
   ngOnInit() {
+  }
+
+  loadTodo() {
+    this.apiServices.listToDo().subscribe(
+      data => {
+        this.toDos = data;
+      },
+        error => {
+          console.log(error)
+          alert("Error");
+        }
+    );
   }
 
   checkLogIn(){
@@ -48,8 +64,37 @@ export class TodoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed ,result : ',result);
-      // this.animal = result;
+      if(result)
+        this.loadTodo();
     });
+  }
+
+  delete(todo){
+    this.apiServices.deleteToDo(todo.id).subscribe(
+      data => {
+        this.loadTodo();
+      },
+        error => {
+          console.log(error)
+          alert("Error");
+        }
+    );
+  }
+
+  update(todo){console.log(todo.reminder);
+    var body = {
+      Subject : todo.Subject,
+      comment:todo.comment,
+      reminder:todo.reminder
+    };
+    this.apiServices.updateToDo(todo.id,body).subscribe(
+      data => {
+        this.loadTodo();
+      },
+        error => {
+          console.log(error)
+          alert("Error");
+        }
+    );
   }
 }
