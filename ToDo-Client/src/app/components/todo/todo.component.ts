@@ -23,10 +23,18 @@ export class TodoComponent implements OnInit {
   user:any = {};
 
   constructor(private router: Router, private dialog: MatDialog) {
-    this.user = JSON.parse(localStorage.getItem('user'))
+    this.checkLogIn();
   }
 
   ngOnInit() {
+  }
+
+  checkLogIn(){
+    if(localStorage.getItem("user") === null){
+      this.router.navigate(['/']);
+    }else{
+      this.user = JSON.parse(localStorage.getItem('user'))
+    }
   }
 
   logout(){

@@ -1,10 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+
 import { TodoComponent } from './components/todo/todo.component';
+import { ApiService } from './components/Service/api.service';
+
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { RouterModule, Routes } from '@angular/router';
@@ -26,7 +30,8 @@ import { CreateTodoComponent } from './components/create-todo/create-todo.compon
 
 const appRoutes: Routes = [
   { path: 'todo', component: TodoComponent },
-  { path: '', component: LoginComponent }
+  { path: '', component: LoginComponent },
+  { path: 'register', component: RegisterComponent }
 ];
 
 
@@ -46,6 +51,7 @@ export function getAuthServiceConfigs() {
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     TodoComponent,
     CreateTodoComponent
   ],entryComponents: [
@@ -62,6 +68,7 @@ export function getAuthServiceConfigs() {
     MatDialogModule,
     MatTableModule,
     MatMenuModule,
+    HttpClientModule,
     MatIconModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
@@ -82,7 +89,9 @@ export function getAuthServiceConfigs() {
    MatIconModule,
    MatProgressSpinnerModule
   ],
-  providers: [{
+  providers: [
+    ApiService,
+    {
     provide: AuthServiceConfig,
     useFactory: getAuthServiceConfigs
   }],

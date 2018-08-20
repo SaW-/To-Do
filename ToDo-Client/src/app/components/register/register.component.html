@@ -4,9 +4,12 @@
   </mat-card-header>
   <mat-card-content>
     <mat-card-header>
-      <mat-card-title>Please login</mat-card-title>
+      <mat-card-title>Please Enter your details</mat-card-title>
     </mat-card-header> 
     <div class="example-container">
+        <mat-form-field>
+            <input matInput type="name" [(ngModel)]="name" required placeholder="Name">
+          </mat-form-field>
       <mat-form-field>
         <input matInput type="email" [(ngModel)]="email" required placeholder="Email">
       </mat-form-field>
@@ -17,11 +20,9 @@
     </div>
    </mat-card-content>
    <mat-card-actions>
-      <button mat-raised-button (click)="login()" color="primary">Login</button>
+      <button mat-raised-button (click)="register()" color="primary">Register</button>
+      <button mat-raised-button (click)="back()" color="primary">Back</button>
+
     </mat-card-actions>
-  <mat-card-actions>
-    <button mat-raised-button (click)="register()" color="primary">Register</button>
-    or
-    <button mat-raised-button (click)="socialSignIn()" color="primary">Login by G+</button>
-  </mat-card-actions>
+
 </mat-card>

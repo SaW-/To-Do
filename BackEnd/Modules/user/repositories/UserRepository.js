@@ -17,7 +17,8 @@ exports.gPlusLogin = (user) => {
     where: {
       email: user.email,
       name: user.name,
-      googleId: user.googleId
+      googleId: user.googleId,
+      provider:user.provider
     }
   })
   .spread(function(userResult, created){
