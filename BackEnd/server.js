@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(validator());
 
 load('Modules/Todo').into(app);
+load('Modules/User').into(app);
 
 app.listen(port, function(){
     console.log('Server started on port '+port);
