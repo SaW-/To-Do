@@ -3,6 +3,7 @@ var load = require('express-load');
 var path = require('path');
 var bodyParser = require('body-parser');
 var validator = require('express-validator');
+var mailCron = require('./cronjobs/reminderCronJobs');
 
 var port = 3000;
 
@@ -29,6 +30,8 @@ app.use(function (req, res, next) {
 });
 load('Modules/Todo').into(app);
 load('Modules/User').into(app);
+
+mailCron.reminders();
 
 app.listen(port, function(){
     console.log('Server started on port '+port);
