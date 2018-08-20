@@ -23,7 +23,7 @@ exports.store = (req, res) => {
   if (errors) {
     return res.status(400).json({error: errors });
   } else {
-    TodoService.create(req.body,req.userData.userId).then(todo=>{
+    TodoService.create(req.body,req.userData).then(todo=>{
       if (!todo)
         return res.status(400).json({error:"error"});
       return res.status(201).json(todo);

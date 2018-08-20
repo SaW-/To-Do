@@ -1,4 +1,5 @@
 var TodoRepository = require("../repositories/TodoRepository.js");
+var MsgQueueRepository = require("../repositories/MsgQueueRepository.js");
 var mail = require("../../../utilities/mail.js");
 
 exports.listAll = (userId) => {
@@ -15,26 +16,46 @@ exports.showById = (id) => {
     );
 }
 
-exports.create = (data,userId) => {
-    data.user_id = userId;
+exports.create = (data,userData) => {
+    data.user_id = userData.userId;
     return TodoRepository.create(data).then((todo)=>{
-        return todo;
+        if(todo.reminder){
+            var msg = {
+                subject:todo.Subject,
+                todoId:todo.id,
+                reminder:todo.reminder,
+                to:userData.email
+            }
+            return MsgQueueRepository.create(msg).then((todo)=>{
+                return todo;
+                });
+        }else{
+            return todo;
         }
-    );
+    });
 }
 
 exports.update = (id,data,userData) => {
 
     return TodoRepository.update(id,data,userData.userId).then((todo)=>{
-        mail.send(userData.email,"You Have update in "+data.Subject+" Subject");
-        return todo;
+        var msg = {
+            subject:data.Subject,
+            todoId:data.id,
+            reminder:data.reminder,
+            to:userData.email
         }
-    );
+        return MsgQueueRepository.update(id,msg).then((queue)=>{
+            mail.send(userData.email,"You Have update in "+data.Subject+" Subject");
+            return todo;
+            });
+        });
 }
 
 exports.delete = (id,userId) => {
     return TodoRepository.delete(id,userId).then((todo)=>{
-        return todo;
+        return MsgQueueRepository.delete(id).then((queue)=>{
+            return todo;
+            });
         }
     );
 }
