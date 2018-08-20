@@ -1,5 +1,5 @@
 var TodoRepository = require("../repositories/TodoRepository.js");
-
+var mail = require("../../../utilities/mail.js");
 
 exports.listAll = (userId) => {
     return TodoRepository.listAll(userId).then((todos)=>{
@@ -23,9 +23,10 @@ exports.create = (data,userId) => {
     );
 }
 
-exports.update = (id,data,userId) => {
+exports.update = (id,data,userData) => {
 
-    return TodoRepository.update(id,data,userId).then((todo)=>{
+    return TodoRepository.update(id,data,userData.userId).then((todo)=>{
+        mail.send(userData.email,"You Have update in "+data.Subject+" Subject");
         return todo;
         }
     );

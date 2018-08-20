@@ -81,7 +81,7 @@ export class TodoComponent implements OnInit {
     );
   }
 
-  update(todo){console.log(todo.reminder);
+  update(todo){
     var body = {
       Subject : todo.Subject,
       comment:todo.comment,

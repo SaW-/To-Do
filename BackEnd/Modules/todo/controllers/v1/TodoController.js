@@ -42,7 +42,7 @@ exports.update = (req, res) => {
   if (errors) {
     return res.status(400).json({error: errors });
   } else {
-    TodoService.update(req.params.id,req.body,req.userData.userId).then(todo=>{
+    TodoService.update(req.params.id,req.body,req.userData).then(todo=>{
       if (todo == 0)
         return res.status(404).json({error:"Not found"});
       return res.json("success");
