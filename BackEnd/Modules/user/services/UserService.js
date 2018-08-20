@@ -20,14 +20,22 @@ exports.signin = (data) => {
             if(!user){
                 return {error:'mail not found'}
             }else{
-                return user.validPassword(data.password,user.password,user).then(isMatched =>{
-                    if(isMatched){
+                if(data.provider == "email"){
+                    return user.validPassword(data.password,user.password,user).then(isMatched =>{
+                        if(isMatched){
+                            var token = jwt.sign({ email:user.email,userId:user.id }, config.JWT.key);
+                            return user.toJSON(token);
+                        }else{
+                            return {error:'password wrong'}
+                        }
+                    });
+                }else{
+                    return UserRepository.gPlusLogin(data).then((user)=>{
                         var token = jwt.sign({ email:user.email,userId:user.id }, config.JWT.key);
                         return user.toJSON(token);
-                    }else{
-                        return {error:'password wrong'}
-                    }
-                });
+                    });
+                }
+                
             }
         }
     );

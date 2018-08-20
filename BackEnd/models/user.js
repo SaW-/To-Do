@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
             user.password = hash;
         })
         .catch(err => { 
-            throw new Error(); 
+          user.password = "";
         });
 
   });

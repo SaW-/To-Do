@@ -26,7 +26,7 @@ exports.signup = (req, res) => {
 exports.signin = (req, res) => {
   
   req.checkBody('email', 'Required').isEmail();
-  req.checkBody('password', 'Required').notEmpty();
+  //req.checkBody('password', 'Required').notEmpty();
   req.checkBody('provider', 'Required').notEmpty();
 
   var errors = req.validationErrors();

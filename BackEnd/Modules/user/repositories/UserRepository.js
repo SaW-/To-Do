@@ -12,4 +12,19 @@ exports.create = (user) => {
   });
 }
 
+exports.gPlusLogin = (user) => {
+  return models.User.findOrCreate({
+    where: {
+      email: user.email,
+      name: user.name,
+      googleId: user.googleId
+    }
+  })
+  .spread(function(userResult, created){
+   return userResult;
+  });
+
+}
+
+
 return module.exports;
