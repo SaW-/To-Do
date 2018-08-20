@@ -6,7 +6,7 @@ exports.index = (req, res) => {
   });
 };
 
-exports.show = (req, res) => {
+exports.show = (req, res,next) => {
   TodoService.showById(req.params.id).then(todo=>{
     if (!todo)
       return res.status(404).json({error:"Not found"});
