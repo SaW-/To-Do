@@ -21,7 +21,7 @@ exports.store = (req, res) => {
 
   var errors = req.validationErrors();
   if (errors) {
-    return res.status(400).json({errors: errors });
+    return res.status(400).json({error: errors });
   } else {
     TodoService.create(req.body).then(todo=>{
       if (!todo)
@@ -40,7 +40,7 @@ exports.update = (req, res) => {
 
   var errors = req.validationErrors();
   if (errors) {
-    return res.status(400).json({errors: errors });
+    return res.status(400).json({error: errors });
   } else {
     TodoService.update(req.params.id,req.body).then(todo=>{
       if (todo == 0)

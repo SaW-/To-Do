@@ -1,39 +1,17 @@
 var UserRepository = require("../repositories/UserRepository.js");
 
 
-exports.listAll = () => {
-    return TodoRepository.listAll().then((todos)=>{
-        return todos;
+exports.signup = (data) => {
+    return UserRepository.findUserByEmail(data.email).then((user)=>{
+            if(user){
+                return {error:'mail exits'}
+            }else{
+                return UserRepository.create(data).then((user)=>{
+                    return user;
+                });
+            }
         }
     );
 }
 
-exports.showById = (id) => {
-    return TodoRepository.getOne(id).then((todo)=>{
-        return todo;
-        }
-    );
-}
-
-exports.create = (data) => {
-    return TodoRepository.create(data).then((todo)=>{
-        return todo;
-        }
-    );
-}
-
-exports.update = (id,data) => {
-    return TodoRepository.update(id,data).then((todo)=>{
-        return todo;
-        }
-    );
-}
-
-exports.delete = (id) => {
-    return TodoRepository.delete(id).then((todo)=>{
-        return todo;
-        }
-    );
-}
-  
 return module.exports;

@@ -1,20 +1,14 @@
 var models = require("../../../models");
 
-exports.listAll = () => {
-  return models.Todo.findAll().then(todos => {
-    return todos;
+exports.findUserByEmail = (email) => {
+  return models.User.findOne({ where: { email: email } }).then(user => {
+    return user;
   });
 }
 
-exports.getOne = (id) => {
-  return models.Todo.findById(id).then(todo => {
-    return todo;
-  });
-}
-
-exports.create = (todo) => {
-  return models.Todo.create(todo).then(todo => {
-    return todo;
+exports.create = (user) => {
+  return models.User.create(user).then(user => {
+    return user;
   });
 }
 
