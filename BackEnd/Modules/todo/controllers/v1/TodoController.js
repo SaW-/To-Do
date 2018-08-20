@@ -1,12 +1,12 @@
 var TodoService = require("../../services/TodoService.js");
 
 exports.index = (req, res) => {
-  TodoService.listAll().then(todos=>{
+  TodoService.listAll(req.userData.userId).then(todos=>{
     return  res.json(todos);
   });
 };
 
-exports.show = (req, res,next) => {
+exports.show = (req, res) => {
   TodoService.showById(req.params.id).then(todo=>{
     if (!todo)
       return res.status(404).json({error:"Not found"});
@@ -23,7 +23,7 @@ exports.store = (req, res) => {
   if (errors) {
     return res.status(400).json({error: errors });
   } else {
-    TodoService.create(req.body).then(todo=>{
+    TodoService.create(req.body,req.userData.userId).then(todo=>{
       if (!todo)
         return res.status(400).json({error:"error"});
       return res.status(201).json(todo);
@@ -42,7 +42,7 @@ exports.update = (req, res) => {
   if (errors) {
     return res.status(400).json({error: errors });
   } else {
-    TodoService.update(req.params.id,req.body).then(todo=>{
+    TodoService.update(req.params.id,req.body,req.userData.userId).then(todo=>{
       if (todo == 0)
         return res.status(404).json({error:"Not found"});
       return res.json("success");
@@ -53,7 +53,7 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
   
-  TodoService.delete(req.params.id).then(todo=>{
+  TodoService.delete(req.params.id,req.userData.userId).then(todo=>{
     if (todo == 0)
       return res.status(404).json({error:"Not found"});
     return res.json("success");

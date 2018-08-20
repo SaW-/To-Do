@@ -1,8 +1,8 @@
 var TodoRepository = require("../repositories/TodoRepository.js");
 
 
-exports.listAll = () => {
-    return TodoRepository.listAll().then((todos)=>{
+exports.listAll = (userId) => {
+    return TodoRepository.listAll(userId).then((todos)=>{
         return todos;
         }
     );
@@ -15,22 +15,23 @@ exports.showById = (id) => {
     );
 }
 
-exports.create = (data) => {
+exports.create = (data,userId) => {
+    data.user_id = userId;
     return TodoRepository.create(data).then((todo)=>{
         return todo;
         }
     );
 }
 
-exports.update = (id,data) => {
-    return TodoRepository.update(id,data).then((todo)=>{
+exports.update = (id,data,userId) => {
+    return TodoRepository.update(id,data,userId).then((todo)=>{
         return todo;
         }
     );
 }
 
-exports.delete = (id) => {
-    return TodoRepository.delete(id).then((todo)=>{
+exports.delete = (id,userId) => {
+    return TodoRepository.delete(id,userId).then((todo)=>{
         return todo;
         }
     );

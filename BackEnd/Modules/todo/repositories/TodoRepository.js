@@ -1,7 +1,7 @@
 var models = require("../../../models");
 
-exports.listAll = () => {
-  return models.Todo.findAll().then(todos => {
+exports.listAll = (userId) => {
+  return models.Todo.findAll({where:{user_id:userId}}).then(todos => {
     return todos;
   });
 }
@@ -18,19 +18,23 @@ exports.create = (todo) => {
   });
 }
 
-exports.update = (id,data) => {
+exports.update = (id,data,userId) => {
   return models.Todo.update(
     data,
-    { where: { id: id } }
+    { where: { 
+      id: id,
+      user_id:userId
+     } }
   ).then(result  => {
     return result;
   });
 }
 
-exports.delete = (id) => {
+exports.delete = (id,userId) => {
   return models.Todo.destroy({
     where: {
-        id: id
+        id: id,
+        user_id:userId
     }
   }).then(result  => {
     return result;
