@@ -10,23 +10,31 @@ module.exports = (sequelize, DataTypes) => {
     idToken: DataTypes.TEXT,
     provider: DataTypes.STRING,
     gToken: DataTypes.TEXT
-  }, {
-    classMethods:{
-      validPassword: function(password,hash,done,user){
-        bcrypt.compare(password, hash, function(err, isMatch) {
-          if(err) console.log(err)
-          if(isMatch){
-            return done(null,user);
-          }else{
-            return done(null,false);
-          }
-      });
-      }
-    }
-  });
+  },{});
+
   User.associate = function(models) {
     // associations can be defined here
   };
+
+  User.prototype.validPassword= function(password,hash,user){
+    return bcrypt.compare(password, hash).then(isMatch =>{
+      if(isMatch){
+        return true;
+      }else{
+        return false;
+      }
+    }).catch(err => { 
+        throw new Error(); 
+    });
+  }
+
+  User.prototype.toJSON =  function (token) {
+    var values = Object.assign({}, this.get());
+    values.token = token;
+    delete values.password;
+    return values;
+  }
+
 
   User.beforeCreate((user, options) => {
     return bcrypt.hash(user.password, 10)
